@@ -25,11 +25,6 @@ namespace KaomojiTray
       InitializeComponent();
     }
 
-    private void Window_LostFocus(object sender, RoutedEventArgs e)
-    {
-      Close();
-    }
-
     private void Window_Deactivated(object sender, EventArgs e)
     {
       Close();
