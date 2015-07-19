@@ -2,9 +2,9 @@
 A system tray application to provide quick access to japanese kaomoji
 
 # Progress
-Can load into the system tray. Left clicking the icon opens an empty window. Right clicking opens a menu allowing you to exit the applicationl
+Basic functionality is done. Can load into the system tray. Left clicking the icon opens the library where you can click on items to copy them to the clipboard and closes the library.
 
 # TODO: 
-- Implement UI for picking a kaomoji from the library
-- When clicking an icon in the library, copy to the clipboard (and optionally close the window)
-- Put a proper icon on the system tray. Curently has a placeholder icon
+- Make the UI better. Is ugly at the moment.
+- Options for whether to close the window when clicking on an emoji
+- Make a proper icon. Curently has a placeholder icon for the system tray

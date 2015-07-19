@@ -40,32 +40,8 @@ namespace KaomojiTray
     {
       var Window = new MainWindow();
       Window.Title = "Kaomoji Library";
+      Window.LoadLibrary(Library);
       Window.Show();
-      //var Popup = new Popup();
-      ////Popup.Parent = this.notifyIcon as FrameworkElement;
-
-      //var Dock = new DockPanel();
-      //Popup.Child = Dock;
-      //Dock.Height = 400;
-      //Dock.Width = 600;
-
-      //var CategoryStack = new StackPanel();
-      ////CategoryStack.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-      //Dock.Children.Add(CategoryStack);
-      //DockPanel.SetDock(CategoryStack, System.Windows.Controls.Dock.Left);
-      //Dock.LastChildFill = true;
-
-      //var SectionStack = new StackPanel();
-      //Dock.Children.Add(SectionStack);
-
-      //foreach (var Category in Library.category)
-      //{
-      //  var CategoryCaption = new TextBlock() { Text = Category.id };
-      //  CategoryStack.Children.Add(CategoryCaption);
-      //}
-
-      //Popup.HasDropShadow = true;
-      //Popup.
     }
 
     private void ExitMenuItemClick(object sender, EventArgs e)
@@ -74,18 +50,18 @@ namespace KaomojiTray
     }
   }
 
-  class KaomojiLibrary
+  public class KaomojiLibrary
   {
     public List<KaomojiCategory> category { get; set; }
   }
 
-  class KaomojiCategory
+  public class KaomojiCategory
   {
     public string id { get; set; }
     public List<KaomojiSection> sections { get; set; }
   }
 
-  class KaomojiSection
+  public class KaomojiSection
   {
     public string id { get; set; }
     public List<string> kaomoji { get; set; }
