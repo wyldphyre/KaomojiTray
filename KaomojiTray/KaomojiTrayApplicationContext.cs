@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using System.Runtime.Serialization;
 
 namespace KaomojiTray
 {
@@ -50,20 +45,28 @@ namespace KaomojiTray
     }
   }
 
+  [DataContract]
   public class KaomojiLibrary
   {
+    [DataMember]
     public List<KaomojiCategory> category { get; set; }
   }
 
+  [DataContract]
   public class KaomojiCategory
   {
+    [DataMember]
     public string id { get; set; }
+    [DataMember]
     public List<KaomojiSection> sections { get; set; }
   }
 
+  [DataContract]
   public class KaomojiSection
   {
+    [DataMember]
     public string id { get; set; }
+    [DataMember]
     public List<string> kaomoji { get; set; }
   }
 }
