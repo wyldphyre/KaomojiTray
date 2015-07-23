@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace KaomojiTray
 {
@@ -16,10 +16,8 @@ namespace KaomojiTray
 
       var Assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
-      using (var StreamReader = new StreamReader(Assembly.GetManifestResourceStream(Assembly.GetName().Name + ".kaomoji.json")))
-      {
-        this.Library = Newtonsoft.Json.JsonConvert.DeserializeObject<KaomojiLibrary>(StreamReader.ReadToEnd());
-      }
+      var Serializer = new DataContractJsonSerializer(typeof(KaomojiLibrary));
+      this.Library = Serializer.ReadObject(Assembly.GetManifestResourceStream(Assembly.GetName().Name + ".kaomoji.json")) as KaomojiLibrary;
 
       this.IconClickEvent += KaomojiTrayApplicationContext_IconClickEvent;
       
