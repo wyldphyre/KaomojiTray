@@ -12,7 +12,7 @@ namespace KaomojiTray
 
     public KaomojiTrayApplicationContext() : base()
     {
-      SetIconImage(KaomojiTray.Properties.Resources.Close_16);
+      SetIconImage(KaomojiTray.Properties.Resources.MainIcon32x32);
 
       var Assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
