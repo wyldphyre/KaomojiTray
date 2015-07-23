@@ -45,6 +45,7 @@ namespace KaomojiTray
         CategoryBorder.MouseUp += (sender, e) =>
         {
           ShowCategory(Category);
+          SectionScrollViewer.ScrollToTop();
         };
 
         CategoryStackPanel.Children.Add(CategoryBorder);
