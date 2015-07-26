@@ -7,6 +7,7 @@ Basic functionality is done. Can load into the system tray. Left clicking the ic
 # TODO: 
 - Make the UI better. Is ugly at the moment.
 - Options for whether to close the window when clicking on an emoji
+- Persist window size between sessions
 - Make a proper icon. Curently has a placeholder icon for the system tray
-- Add support for favouriting emoji and collecting them in a favourites category
+- Add support for showing recently used emoji
 - Look at adding some useful western ones, such as ¯\_(ツ)_/¯
