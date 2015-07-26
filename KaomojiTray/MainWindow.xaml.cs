@@ -6,13 +6,16 @@ using System.Windows.Media;
 
 namespace KaomojiTray
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
+  public partial class MainWindow : Window
   {
     private bool IsClosing = false;
-    public  KaomojiLibrary Library { get; private set; }
+    private Brush BackgrorundBrush { get; } = Brushes.Black;
+    private Brush ForegroundBrush { get; } = Brushes.White;
+
+    public KaomojiLibrary Library { get; private set; }
 
     public MainWindow()
     {
@@ -23,29 +26,42 @@ namespace KaomojiTray
     {
       this.Library = Library;
 
+      MainGrid.Background = BackgrorundBrush;
+
       foreach (var Category in Library.category)
       {
         var CategoryCaption = new TextBlock()
         {
           Text = Category.id.ToUpper(),
-          Foreground = Brushes.White,
           Padding = new Thickness(5),
           FontFamily = new FontFamily("Segoe UI"),
           FontSize = 16,
-          HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-          Width = 110,
+          HorizontalAlignment = HorizontalAlignment.Center,
+          Background = BackgrorundBrush,
+          Foreground = ForegroundBrush
         };
-
+        
         var CategoryBorder = new Border();
         CategoryBorder.Child = CategoryCaption;
         CategoryBorder.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-        CategoryBorder.BorderBrush = Brushes.Gray;
-        CategoryBorder.Background = Brushes.SteelBlue;
+        CategoryBorder.Background = BackgrorundBrush;
         CategoryBorder.Margin = new Thickness(5);
         CategoryBorder.MouseUp += (sender, e) =>
         {
           ShowCategory(Category);
           SectionScrollViewer.ScrollToTop();
+        };
+        CategoryBorder.MouseEnter += (sender, e) =>
+        {
+          CategoryCaption.TextDecorations = TextDecorations.Underline;
+          CategoryCaption.Background = ForegroundBrush;
+          CategoryCaption.Foreground = BackgrorundBrush;
+        };
+        CategoryBorder.MouseLeave += (sender, e) =>
+        {
+          CategoryCaption.TextDecorations = null;
+          CategoryCaption.Background = BackgrorundBrush;
+          CategoryCaption.Foreground = ForegroundBrush;
         };
 
         CategoryStackPanel.Children.Add(CategoryBorder);
@@ -70,28 +86,36 @@ namespace KaomojiTray
           Text = Section.id.ToUpper(), 
           FontSize = 18, 
           FontWeight = FontWeights.Bold,
-          TextAlignment = TextAlignment.Center
+          TextAlignment = TextAlignment.Center,
+          TextDecorations = TextDecorations. Underline ,
+          Background = BackgrorundBrush,
+          Foreground = ForegroundBrush
         };
         SectionDock.Children.Add(Heading);
         DockPanel.SetDock(Heading, Dock.Top);
 
         var KaomojiStack = new WrapPanel();
-        SectionDock.Children.Add(KaomojiStack); 
+        SectionDock.Children.Add(KaomojiStack);
 
         foreach (var Kaomoji in Section.kaomoji)
         {
-          var KaomojiTextBlock = new TextBlock() { Text = Kaomoji, FontSize = 14 };
-          KaomojiTextBlock.Margin = new Thickness(5);
-          KaomojiTextBlock.Padding = new Thickness(7);
+          var KaomojiTextBlock = new TextBlock()
+          {
+            Text = Kaomoji,
+            FontSize = 15,
+            Margin = new Thickness(5),
+            Padding = new Thickness(7),
+            Foreground = ForegroundBrush
+          };
           KaomojiTextBlock.MouseEnter += (sender, e) =>
           {
-            KaomojiTextBlock.Background = Brushes.SteelBlue;
-            KaomojiTextBlock.Foreground = Brushes.White;
+            KaomojiTextBlock.Background = ForegroundBrush;
+            KaomojiTextBlock.Foreground = BackgrorundBrush;
           };
           KaomojiTextBlock.MouseLeave += (sender, e) =>
           {
-            KaomojiTextBlock.Background = Brushes.White;
-            KaomojiTextBlock.Foreground = Brushes.Black;
+            KaomojiTextBlock.Background = BackgrorundBrush;
+            KaomojiTextBlock.Foreground = ForegroundBrush;
           };
           KaomojiTextBlock.MouseUp += (sender, e) =>
           {
