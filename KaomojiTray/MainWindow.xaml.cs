@@ -43,7 +43,7 @@ namespace KaomojiTray
         
         var CategoryBorder = new Border();
         CategoryBorder.Child = CategoryCaption;
-        CategoryBorder.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+        CategoryBorder.HorizontalAlignment = HorizontalAlignment.Stretch;
         CategoryBorder.Background = BackgrorundBrush;
         CategoryBorder.Margin = new Thickness(5);
         CategoryBorder.MouseUp += (sender, e) =>
