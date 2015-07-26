@@ -18,8 +18,6 @@ namespace KaomojiTray
 
       var context = new KaomojiTrayApplicationContext();
       Application.Run(context);
-
-      //Application.Run(new Form1());
     }
   }
 }
