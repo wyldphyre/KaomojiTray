@@ -87,7 +87,7 @@ namespace KaomojiTray
           FontSize = 18, 
           FontWeight = FontWeights.Bold,
           TextAlignment = TextAlignment.Center,
-          TextDecorations = TextDecorations. Underline ,
+          TextDecorations = TextDecorations.Underline,
           Background = BackgrorundBrush,
           Foreground = ForegroundBrush
         };
