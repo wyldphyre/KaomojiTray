@@ -102,6 +102,7 @@ namespace KaomojiTray
           var KaomojiTextBlock = new TextBlock()
           {
             Text = Kaomoji,
+            FontFamily = new FontFamily("Arial Unicode MS"),
             FontSize = 15,
             Margin = new Thickness(5),
             Padding = new Thickness(7),
