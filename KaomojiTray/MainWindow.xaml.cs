@@ -12,8 +12,8 @@ namespace KaomojiTray
   public partial class MainWindow : Window
   {
     private bool IsClosing = false;
-    private Brush BackgrorundBrush { get; } = Brushes.Black;
-    private Brush ForegroundBrush { get; } = Brushes.White;
+    private Brush BackgrorundBrush { get; } = Brushes.WhiteSmoke;
+    private Brush ForegroundBrush { get; } = Brushes.Black;
 
     public KaomojiLibrary Library { get; private set; }
 
