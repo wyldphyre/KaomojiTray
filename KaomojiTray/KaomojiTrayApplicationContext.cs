@@ -1,70 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using KaomojiTray.Properties;
 
 namespace KaomojiTray
 {
-  class KaomojiTrayApplicationContext : SystemTrayApplicationContext
-  {
-    public KaomojiLibrary Library { get; private set; }
-
-    public KaomojiTrayApplicationContext() : base()
+    internal class KaomojiTrayApplicationContext : SystemTrayApplicationContext
     {
-      SetIconImage(KaomojiTray.Properties.Resources.MainIcon32x32);
+        public KaomojiTrayApplicationContext()
+        {
+            SetIconImage(Resources.MainIcon32x32);
 
-      var Assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
-      var Serializer = new DataContractJsonSerializer(typeof(KaomojiLibrary));
-      this.Library = Serializer.ReadObject(Assembly.GetManifestResourceStream(Assembly.GetName().Name + ".kaomoji.json")) as KaomojiLibrary;
+            var serializer = new DataContractJsonSerializer(typeof(KaomojiLibrary));
+            Library = serializer.ReadObject(
+                assembly.GetManifestResourceStream(assembly.GetName().Name + ".kaomoji.json")) as KaomojiLibrary;
 
-      this.IconClickEvent += KaomojiTrayApplicationContext_IconClickEvent;
-      
-      AddMenuItem("Exit", null, ExitMenuItemClick);
+            IconClickEvent += KaomojiTrayApplicationContext_IconClickEvent;
+
+            AddMenuItem("Exit", null, ExitMenuItemClick);
+        }
+
+        public KaomojiLibrary Library { get; }
+
+        private void KaomojiTrayApplicationContext_IconClickEvent()
+        {
+            ShowPicker();
+        }
+
+        private void ShowPicker()
+        {
+            var window = new MainWindow();
+            window.Title = "Kaomoji Library";
+            window.LoadLibrary(Library);
+            window.Show();
+        }
+
+        private void ExitMenuItemClick(object sender, EventArgs e)
+        {
+            ExitApplication();
+        }
     }
 
-    void KaomojiTrayApplicationContext_IconClickEvent()
+    [DataContract]
+    public class KaomojiLibrary
     {
-      ShowPicker();
+        [DataMember] public List<KaomojiCategory> category { get; set; }
     }
 
-    private void ShowPicker()
+    [DataContract]
+    public class KaomojiCategory
     {
-      var Window = new MainWindow();
-      Window.Title = "Kaomoji Library";
-      Window.LoadLibrary(Library);
-      Window.Show();
+        [DataMember] public string id { get; set; }
+
+        [DataMember] public List<KaomojiSection> sections { get; set; }
     }
 
-    private void ExitMenuItemClick(object sender, EventArgs e)
+    [DataContract]
+    public class KaomojiSection
     {
-      ExitApplication();
+        [DataMember] public string id { get; set; }
+
+        [DataMember] public List<string> kaomoji { get; set; }
     }
-  }
-
-  [DataContract]
-  public class KaomojiLibrary
-  {
-    [DataMember]
-    public List<KaomojiCategory> category { get; set; }
-  }
-
-  [DataContract]
-  public class KaomojiCategory
-  {
-    [DataMember]
-    public string id { get; set; }
-    [DataMember]
-    public List<KaomojiSection> sections { get; set; }
-  }
-
-  [DataContract]
-  public class KaomojiSection
-  {
-    [DataMember]
-    public string id { get; set; }
-    [DataMember]
-    public List<string> kaomoji { get; set; }
-  }
 }
